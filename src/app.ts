@@ -5,6 +5,7 @@ import config from './config';
 import { uptime } from 'process';
 import { timeStamp } from 'console';
 import globalErrorHandler from './app/middlewares/globalErrorHandlers';
+import router from './app/routes';
 
 const app: Application = express();
 app.use(cors({
@@ -16,6 +17,8 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
+app.use("/api/v1", router)
 
 app.get('/', (req: Request, res: Response) => {
     res.send({
