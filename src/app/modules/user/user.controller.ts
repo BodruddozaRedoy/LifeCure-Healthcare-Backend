@@ -10,7 +10,7 @@ const createPatient = catchAsync( async (req:Request, res:Response) => {
     sendResponse(res, {
         statusCode: 201,
         success: true,
-        message: "User created successfully!",
+        message: "Patient created successfully!",
         data: result
     })
 })
@@ -21,7 +21,7 @@ const createDoctor = catchAsync( async (req:Request, res:Response) => {
     sendResponse(res, {
         statusCode: 201,
         success: true,
-        message: "User created successfully!",
+        message: "Doctor created successfully!",
         data: result
     })
 })
@@ -32,7 +32,7 @@ const createAdmin = catchAsync( async (req:Request, res:Response) => {
     sendResponse(res, {
         statusCode: 201,
         success: true,
-        message: "User created successfully!",
+        message: "Admin created successfully!",
         data: result
     })
 })
