@@ -39,7 +39,8 @@ const createAdmin = catchAsync( async (req:Request, res:Response) => {
 
 const getAllFromDB = catchAsync( async (req:Request, res:Response) => {
     // console.log("Patient: ", req.body)
-    const result = await UserService.getAllFromDB()
+    const {page, limit, search, sortBy, sortOrder} = req.query;
+    const result = await UserService.getAllFromDB({page:Number(page), limit:Number(limit), search, sortBy, sortOrder})
     // console.log(req)
     sendResponse(res, {
         statusCode: 200,
