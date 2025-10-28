@@ -1,8 +1,8 @@
 import { addMinutes, addHours, format } from "date-fns";
 import { prisma } from "../../shared/prisma";
-import { IOptions, paginationHelper } from "../../helper/paginationHelper";
 import { Prisma } from "@prisma/client";
 import { IJWTPayload } from "../../types/common";
+import { IOptions, paginationHelper } from "../../helpers/paginationHelper";
 
 const insertIntoDB = async (payload: any) => {
 

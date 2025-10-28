@@ -3,8 +3,8 @@ import catchAsync from "../../shared/catchAsync";
 import { IJWTPayload } from "../../types/common";
 import { PrescriptionService } from "./prescription.service";
 import sendResponse from "../../shared/sendResponse";
-import pick from "../../helper/pick";
-import httpStatus from 'http-status'
+import httpStatus from "http-status";
+import pick from "../../helpers/pick";
 
 const createPrescription = catchAsync(async (req: Request & { user?: IJWTPayload }, res: Response) => {
     const user = req.user;

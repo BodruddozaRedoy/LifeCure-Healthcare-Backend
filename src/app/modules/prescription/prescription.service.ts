@@ -3,7 +3,7 @@ import { IJWTPayload } from "../../types/common";
 import { prisma } from "../../shared/prisma";
 import ApiError from "../../errors/ApiError";
 import httpStatus from 'http-status'
-import { IOptions, paginationHelper } from "../../helper/paginationHelper";
+import { IOptions, paginationHelper } from "../../helpers/paginationHelper";
 
 const createPrescription = async (user: IJWTPayload, payload: Partial<Prescription>) => {
     const appointmentData = await prisma.appointment.findUniqueOrThrow({

@@ -1,6 +1,5 @@
 import express from 'express';
-import { userRoutes } from '../modules/user/user.routes';
-import { authRoutes } from "../modules/auth/auth.routes";
+import { userRoutes } from "../modules/user/user.routes";
 import { ScheduleRoutes } from "../modules/schedule/schedule.routes";
 import { doctorScheduleRoutes } from "../modules/doctorSchedule/doctorSchedule.routes";
 import { SpecialtiesRoutes } from "../modules/specialties/specialties.routes";
@@ -11,6 +10,7 @@ import { AppointmentRoutes } from "../modules/appointment/appointment.routes";
 import { PrescriptionRoutes } from "../modules/prescription/prescription.routes";
 import { ReviewRoutes } from "../modules/review/review.routes";
 import { MetaRoutes } from "../modules/meta/meta.routes";
+import { authRoutes } from "../modules/auth/auth.route";
 
 const router = express.Router();
 

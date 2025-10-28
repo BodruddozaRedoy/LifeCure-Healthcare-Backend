@@ -1,9 +1,9 @@
 import { Patient, Prisma, UserStatus } from '@prisma/client';
-import { IPatientFilterRequest } from './patient.interface';
-import { IOptions, paginationHelper } from '../../helper/paginationHelper';
-import { patientSearchableFields } from './patient.constant';
-import { prisma } from '../../shared/prisma';
-import { IJWTPayload } from '../../types/common';
+import { IPatientFilterRequest } from "./patient.interface";
+import { patientSearchableFields } from "./patient.constant";
+import { prisma } from "../../shared/prisma";
+import { IJWTPayload } from "../../types/common";
+import { IOptions, paginationHelper } from "../../helpers/paginationHelper";
 
 
 const getAllFromDB = async (

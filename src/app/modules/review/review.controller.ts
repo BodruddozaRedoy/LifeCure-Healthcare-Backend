@@ -4,7 +4,7 @@ import { ReviewService } from "./review.service";
 import { IJWTPayload } from "../../types/common";
 import catchAsync from "../../shared/catchAsync";
 import sendResponse from "../../shared/sendResponse";
-import pick from "../../helper/pick";
+import pick from "../../helpers/pick";
 import { reviewFilterableFields } from "./review.constant";
 
 const insertIntoDB = catchAsync(async (req: Request & { user?: IJWTPayload }, res: Response) => {

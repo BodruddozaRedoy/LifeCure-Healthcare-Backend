@@ -1,6 +1,5 @@
 import express, { Application, NextFunction, Request, Response } from 'express';
-import cors from 'cors';
-import globalErrorHandler from "./app/middlewares/globalErrorHandler";
+import cors from "cors";
 import notFound from "./app/middlewares/notFound";
 import config from "./config";
 import router from "./app/routes";
@@ -8,6 +7,7 @@ import cookieParser from "cookie-parser";
 import { PaymentController } from "./app/modules/payment/payment.controller";
 import cron from "node-cron";
 import { AppointmentService } from "./app/modules/appointment/appointment.service";
+import globalErrorHandler from "./app/middlewares/globalErrorHandlers";
 
 const app: Application = express();
 

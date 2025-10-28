@@ -1,7 +1,7 @@
 import { Request } from "express";
-import { fileUploader } from "../../helper/fileUploader";
 import { prisma } from "../../shared/prisma";
 import { Specialties } from "@prisma/client";
+import { fileUploader } from "../../helpers/fileUploader";
 
 const inserIntoDB = async (req: Request) => {
 
