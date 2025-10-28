@@ -1,4 +1,4 @@
-export type createPatientType = {
+export type createPatientInput = {
     name: string;
     email: string;
     password: string;
