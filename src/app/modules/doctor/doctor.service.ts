@@ -143,8 +143,6 @@ const updateIntoDB = async (
           },
         },
       },
-
-      //  doctor - doctorSpecailties - specialities
     });
 
     return updatedData;
