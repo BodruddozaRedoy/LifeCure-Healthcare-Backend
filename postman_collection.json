@@ -1,0 +1,661 @@
+{
+  "info": {
+    "_postman_id": "f4c0f3e8-7b6a-4d3a-a1d2-9d2d1a4d8f10",
+    "name": "LifeCure Healthcare Backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Postman collection covering all API endpoints for LifeCure Healthcare Backend."
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Get Me",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/auth/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "me"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "login"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refreshToken\": \"{{refreshToken}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/auth/refresh-token",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "refresh-token"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Change Password",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"oldPassword\": \"old_pass\",\n  \"newPassword\": \"new_pass\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/auth/change-password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "change-password"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Forgot Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/auth/forgot-password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "forgot-password"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Reset Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"token\": \"<reset_token>\",\n  \"newPassword\": \"new_pass\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/auth/reset-password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "reset-password"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Get All Users (ADMIN)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                { "key": "token", "value": "{{authToken}}", "type": "string" }
+              ]
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/user",
+              "host": ["{{baseUrl}}"],
+              "path": ["api","v1","user"]
+            }
+          }
+        },
+        {
+          "name": "My Profile",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{"key": "token", "value": "{{authToken}}", "type": "string"}] },
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/v1/user/me", "host": ["{{baseUrl}}"], "path": ["api","v1","user","me"] }
+          }
+        },
+        {
+          "name": "Create Patient",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "multipart/form-data" } ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "file", "type": "file", "src": [] },
+                { "key": "data", "type": "text", "value": "{\\n  \\"password\\": \\"password123\\",\\n  \\"patient\\": {\\n    \\"name\\": \\"John Doe\\",\\n    \\"contactNo\\": \\"0123456789\\"\\n  }\\n}" }
+              ]
+            },
+            "url": { "raw": "{{baseUrl}}/api/v1/user/create-patient", "host": ["{{baseUrl}}"], "path": ["api","v1","user","create-patient"] }
+          }
+        },
+        {
+          "name": "Create Admin (ADMIN)",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{"key": "token", "value": "{{authToken}}", "type": "string"}] },
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "multipart/form-data" } ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "file", "type": "file", "src": [] },
+                { "key": "data", "type": "text", "value": "{\\n  \\"password\\": \\"password123\\",\\n  \\"admin\\": {\\n    \\"name\\": \\"Admin User\\",\\n    \\"contactNo\\": \\"0123456789\\"\\n  }\\n}" }
+              ]
+            },
+            "url": { "raw": "{{baseUrl}}/api/v1/user/create-admin", "host": ["{{baseUrl}}"], "path": ["api","v1","user","create-admin"] }
+          }
+        },
+        {
+          "name": "Create Doctor (ADMIN)",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{"key": "token", "value": "{{authToken}}", "type": "string"}] },
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "multipart/form-data" } ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "file", "type": "file", "src": [] },
+                { "key": "data", "type": "text", "value": "{\\n  \\"password\\": \\"password123\\",\\n  \\"doctor\\": {\\n    \\"name\\": \\"Dr. Strange\\",\\n    \\"contactNo\\": \\"0123456789\\",\\n    \\"specialtiesId\\": \\"<specialty-id>\\"\\n  }\\n}" }
+              ]
+            },
+            "url": { "raw": "{{baseUrl}}/api/v1/user/create-doctor", "host": ["{{baseUrl}}"], "path": ["api","v1","user","create-doctor"] }
+          }
+        },
+        {
+          "name": "Change User Status (ADMIN)",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{"key": "token", "value": "{{authToken}}", "type": "string"}] },
+            "method": "PATCH",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"status\": \"ACTIVE\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/user/:id/status", "host": ["{{baseUrl}}"], "path": ["api","v1","user",":id","status"] }
+          }
+        },
+        {
+          "name": "Update My Profile",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{"key": "token", "value": "{{authToken}}", "type": "string"}] },
+            "method": "PATCH",
+            "header": [ { "key": "Content-Type", "value": "multipart/form-data" } ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "file", "type": "file", "src": [] },
+                { "key": "data", "type": "text", "value": "{\\n  \\"name\\": \\"Updated Name\\"\\n}" }
+              ]
+            },
+            "url": { "raw": "{{baseUrl}}/api/v1/user/update-my-profile", "host": ["{{baseUrl}}"], "path": ["api","v1","user","update-my-profile"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Schedule",
+      "item": [
+        {
+          "name": "Get Schedules (DOCTOR)",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{"key": "token", "value": "{{authToken}}", "type": "string"}] },
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/v1/schedule", "host": ["{{baseUrl}}"], "path": ["api","v1","schedule"] }
+          }
+        },
+        {
+          "name": "Create Schedule (ADMIN)",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{"key": "token", "value": "{{authToken}}", "type": "string"}] },
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"startDate\": \"2025-11-01\",\n  \"endDate\": \"2025-11-30\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/schedule", "host": ["{{baseUrl}}"], "path": ["api","v1","schedule"] }
+          }
+        },
+        {
+          "name": "Delete Schedule (ADMIN)",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{"key": "token", "value": "{{authToken}}", "type": "string"}] },
+            "method": "DELETE",
+            "url": { "raw": "{{baseUrl}}/api/v1/schedule/:id", "host": ["{{baseUrl}}"], "path": ["api","v1","schedule",":id"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Doctor Schedule",
+      "item": [
+        {
+          "name": "Get All (ADMIN/DOCTOR/PATIENT)",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{"key": "token", "value": "{{authToken}}", "type": "string"}] },
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/v1/doctor-schedule", "host": ["{{baseUrl}}"], "path": ["api","v1","doctor-schedule"] }
+          }
+        },
+        {
+          "name": "My Schedule (DOCTOR)",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{"key": "token", "value": "{{authToken}}", "type": "string"}] },
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/v1/doctor-schedule/my-schedule", "host": ["{{baseUrl}}"], "path": ["api","v1","doctor-schedule","my-schedule"] }
+          }
+        },
+        {
+          "name": "Create (DOCTOR)",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{"key": "token", "value": "{{authToken}}", "type": "string"}] },
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"schedules\": [\n    { \n      \"day\": \"SATURDAY\", \n      \"startTime\": \"09:00\", \n      \"endTime\": \"17:00\" \n    }\n  ]\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/doctor-schedule", "host": ["{{baseUrl}}"], "path": ["api","v1","doctor-schedule"] }
+          }
+        },
+        {
+          "name": "Delete (DOCTOR)",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{"key": "token", "value": "{{authToken}}", "type": "string"}] },
+            "method": "DELETE",
+            "url": { "raw": "{{baseUrl}}/api/v1/doctor-schedule/:id", "host": ["{{baseUrl}}"], "path": ["api","v1","doctor-schedule",":id"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Specialties",
+      "item": [
+        {
+          "name": "Get All",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/v1/specialties", "host": ["{{baseUrl}}"], "path": ["api","v1","specialties"] }
+          }
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "multipart/form-data" } ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "file", "type": "file", "src": [] },
+                { "key": "data", "type": "text", "value": "{\\n  \\"title\\": \\"Cardiology\\",\\n  \\"icon\\": \\"❤️\\"\\n}" }
+              ]
+            },
+            "url": { "raw": "{{baseUrl}}/api/v1/specialties", "host": ["{{baseUrl}}"], "path": ["api","v1","specialties"] }
+          }
+        },
+        {
+          "name": "Delete (ADMIN)",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{"key": "token", "value": "{{authToken}}", "type": "string"}] },
+            "method": "DELETE",
+            "url": { "raw": "{{baseUrl}}/api/v1/specialties/:id", "host": ["{{baseUrl}}"], "path": ["api","v1","specialties",":id"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Doctor",
+      "item": [
+        {
+          "name": "Get All",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/v1/doctor", "host": ["{{baseUrl}}"], "path": ["api","v1","doctor"] }
+          }
+        },
+        {
+          "name": "AI Suggestions",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"symptoms\": [\"fever\", \"cough\"]\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/doctor/suggestion", "host": ["{{baseUrl}}"], "path": ["api","v1","doctor","suggestion"] }
+          }
+        },
+        {
+          "name": "Get By Id",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/v1/doctor/:id", "host": ["{{baseUrl}}"], "path": ["api","v1","doctor",":id"] }
+          }
+        },
+        {
+          "name": "Update (ADMIN/DOCTOR)",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{"key": "token", "value": "{{authToken}}", "type": "string"}] },
+            "method": "PATCH",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Updated Doctor\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/doctor/:id", "host": ["{{baseUrl}}"], "path": ["api","v1","doctor",":id"] }
+          }
+        },
+        {
+          "name": "Delete (ADMIN)",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{"key": "token", "value": "{{authToken}}", "type": "string"}] },
+            "method": "DELETE",
+            "url": { "raw": "{{baseUrl}}/api/v1/doctor/:id", "host": ["{{baseUrl}}"], "path": ["api","v1","doctor",":id"] }
+          }
+        },
+        {
+          "name": "Soft Delete (ADMIN)",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{"key": "token", "value": "{{authToken}}", "type": "string"}] },
+            "method": "DELETE",
+            "url": { "raw": "{{baseUrl}}/api/v1/doctor/soft/:id", "host": ["{{baseUrl}}"], "path": ["api","v1","doctor","soft",":id"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Get All (ADMIN)",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{"key": "token", "value": "{{authToken}}", "type": "string"}] },
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/v1/admin", "host": ["{{baseUrl}}"], "path": ["api","v1","admin"] }
+          }
+        },
+        {
+          "name": "Get By Id (ADMIN)",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{"key": "token", "value": "{{authToken}}", "type": "string"}] },
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/v1/admin/:id", "host": ["{{baseUrl}}"], "path": ["api","v1","admin",":id"] }
+          }
+        },
+        {
+          "name": "Update (ADMIN)",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{"key": "token", "value": "{{authToken}}", "type": "string"}] },
+            "method": "PATCH",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Updated Admin\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/admin/:id", "host": ["{{baseUrl}}"], "path": ["api","v1","admin",":id"] }
+          }
+        },
+        {
+          "name": "Delete (ADMIN)",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{"key": "token", "value": "{{authToken}}", "type": "string"}] },
+            "method": "DELETE",
+            "url": { "raw": "{{baseUrl}}/api/v1/admin/:id", "host": ["{{baseUrl}}"], "path": ["api","v1","admin",":id"] }
+          }
+        },
+        {
+          "name": "Soft Delete (ADMIN)",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{"key": "token", "value": "{{authToken}}", "type": "string"}] },
+            "method": "DELETE",
+            "url": { "raw": "{{baseUrl}}/api/v1/admin/soft/:id", "host": ["{{baseUrl}}"], "path": ["api","v1","admin","soft",":id"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Patient",
+      "item": [
+        {
+          "name": "Get All",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/v1/patient", "host": ["{{baseUrl}}"], "path": ["api","v1","patient"] }
+          }
+        },
+        {
+          "name": "Get By Id",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/v1/patient/:id", "host": ["{{baseUrl}}"], "path": ["api","v1","patient",":id"] }
+          }
+        },
+        {
+          "name": "Update (PATIENT)",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{"key": "token", "value": "{{authToken}}", "type": "string"}] },
+            "method": "PATCH",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Updated Patient\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/patient", "host": ["{{baseUrl}}"], "path": ["api","v1","patient"] }
+          }
+        },
+        {
+          "name": "Soft Delete",
+          "request": {
+            "method": "DELETE",
+            "url": { "raw": "{{baseUrl}}/api/v1/patient/soft/:id", "host": ["{{baseUrl}}"], "path": ["api","v1","patient","soft",":id"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Appointment",
+      "item": [
+        {
+          "name": "Get All (ADMIN)",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{"key": "token", "value": "{{authToken}}", "type": "string"}] },
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/v1/appointment", "host": ["{{baseUrl}}"], "path": ["api","v1","appointment"] }
+          }
+        },
+        {
+          "name": "My Appointments (PATIENT/DOCTOR)",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{"key": "token", "value": "{{authToken}}", "type": "string"}] },
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/v1/appointment/my-appointments", "host": ["{{baseUrl}}"], "path": ["api","v1","appointment","my-appointments"] }
+          }
+        },
+        {
+          "name": "Create (PATIENT)",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{"key": "token", "value": "{{authToken}}", "type": "string"}] },
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"scheduleId\": \"<schedule-id>\",\n  \"doctorId\": \"<doctor-id>\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/appointment", "host": ["{{baseUrl}}"], "path": ["api","v1","appointment"] }
+          }
+        },
+        {
+          "name": "Update Status (ADMIN/DOCTOR)",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{"key": "token", "value": "{{authToken}}", "type": "string"}] },
+            "method": "PATCH",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"status\": \"APPROVED\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/appointment/status/:id", "host": ["{{baseUrl}}"], "path": ["api","v1","appointment","status",":id"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Prescription",
+      "item": [
+        {
+          "name": "My Prescription (PATIENT)",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{"key": "token", "value": "{{authToken}}", "type": "string"}] },
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/v1/prescription/my-prescription", "host": ["{{baseUrl}}"], "path": ["api","v1","prescription","my-prescription"] }
+          }
+        },
+        {
+          "name": "Create (DOCTOR)",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{"key": "token", "value": "{{authToken}}", "type": "string"}] },
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"appointmentId\": \"<appointment-id>\",\n  \"medicines\": [ { \n    \"name\": \"Paracetamol\", \n    \"dosage\": \"500mg\" \n  } ]\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/prescription", "host": ["{{baseUrl}}"], "path": ["api","v1","prescription"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Review",
+      "item": [
+        {
+          "name": "Get All",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/v1/review", "host": ["{{baseUrl}}"], "path": ["api","v1","review"] }
+          }
+        },
+        {
+          "name": "Create (PATIENT)",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{"key": "token", "value": "{{authToken}}", "type": "string"}] },
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"doctorId\": \"<doctor-id>\",\n  \"rating\": 5,\n  \"comment\": \"Great experience\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/review", "host": ["{{baseUrl}}"], "path": ["api","v1","review"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Metadata",
+      "item": [
+        {
+          "name": "Dashboard Meta (ADMIN/DOCTOR/PATIENT)",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{"key": "token", "value": "{{authToken}}", "type": "string"}] },
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/v1/metadata", "host": ["{{baseUrl}}"], "path": ["api","v1","metadata"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Payment",
+      "item": [
+        {
+          "name": "Stripe Webhook (raw)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Stripe-Signature", "value": "<signature>" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"payment_intent.succeeded\",\n  \"data\": { \n    \"object\": { \n      \"id\": \"pi_123\" \n    } \n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/webhook",
+              "host": ["{{baseUrl}}"],
+              "path": ["webhook"]
+            },
+            "description": "Note: This endpoint expects raw body (no JSON parsing)."
+          }
+        }
+      ]
+    }
+  ],
+  "event": [],
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000" },
+    { "key": "authToken", "value": "" },
+    { "key": "refreshToken", "value": "" }
+  ]
+}
+
+
