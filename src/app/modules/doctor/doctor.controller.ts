@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import catchAsync from "../../shared/catchAsync";
-import pick from "../../helper/pick";
 import { DoctorService } from "./doctor.service";
 import sendResponse from "../../shared/sendResponse";
 import { doctorFilterableFields } from "./doctor.constant";
+import pick from "../../helpers/pick";
 
 const getAllFromDB = catchAsync(async (req: Request, res: Response) => {
     const options = pick(req.query, ["page", "limit", "sortBy", "sortOrder"]);

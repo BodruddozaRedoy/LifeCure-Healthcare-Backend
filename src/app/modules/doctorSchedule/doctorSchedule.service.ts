@@ -1,9 +1,9 @@
 import { Prisma } from "@prisma/client";
-import { IOptions, paginationHelper } from "../../helper/paginationHelper";
 import { prisma } from "../../shared/prisma";
 import { IJWTPayload } from "../../types/common";
 import ApiError from "../../errors/ApiError";
 import httpStatus from 'http-status'
+import { IOptions, paginationHelper } from "../../helpers/paginationHelper";
 
 const insertIntoDB = async (user: IJWTPayload, payload: {
     scheduleIds: string[]

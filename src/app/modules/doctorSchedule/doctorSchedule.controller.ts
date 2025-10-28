@@ -4,8 +4,8 @@ import sendResponse from "../../shared/sendResponse";
 import { DoctorScheduleService } from "./doctorSchedule.service";
 import { IJWTPayload } from "../../types/common";
 import httpStatus from 'http-status';
-import pick from "../../helper/pick";
 import { scheduleFilterableFields } from "./doctorSchedule.constant";
+import pick from "../../helpers/pick";
 
 const insertIntoDB = catchAsync(async (req: Request & { user?: IJWTPayload }, res: Response) => {
     const user = req.user;

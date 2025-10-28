@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
 import catchAsync from "../../shared/catchAsync";
-import { AppointmentService } from "./appointment.service";
 import sendResponse from "../../shared/sendResponse";
-import { IJWTPayload } from "../../types/common";
-import pick from "../../helper/pick";
 import { appointmentFilterableFields } from "./appointment.constant";
 import httpStatus from "http-status";
+import { IJWTPayload } from "../../types/common";
+import { AppointmentService } from "./appointment.service";
+import pick from "../../helpers/pick";
 
 const createAppointment = catchAsync(async (req: Request & { user?: IJWTPayload }, res: Response) => {
     const user = req.user;
