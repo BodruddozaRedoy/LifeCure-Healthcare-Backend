@@ -1,31 +1,37 @@
-import nodemailer from 'nodemailer'
-import config from '../../../config';
+import nodemailer from "nodemailer";
+import config from "../../../config";
 
-const emailSender = async (
-    email: string,
-    html: string
-) => {
-    const transporter = nodemailer.createTransport({
-        host: "smtp.gmail.com",
-        port: 587,
-        secure: false, // Use `true` for port 465, `false` for all other ports
-        auth: {
-            user: config.emailSender.email,
-            pass: config.emailSender.app_pass, // app password
-        },
-        tls: {
-            rejectUnauthorized: false
-        }
-    });
+/**
+ * 📧 emailSender Utility
+ * -----------------------------------------------------
+ * Sends HTML-based emails using Nodemailer via Gmail SMTP.
+ * Commonly used for password reset links and notification emails.
+ *
+ * @param email - Recipient's email address
+ * @param html - HTML content of the email body
+ */
+const emailSender = async (email: string, html: string) => {
+  // 🧩 Create a transporter (email client configuration)
+  const transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false, // Use `true` for port 465 (SSL), `false` for others
+    auth: {
+      user: config.emailSender.email,
+      pass: config.emailSender.app_pass, // Gmail App Password (not raw password)
+    },
+    tls: {
+      rejectUnauthorized: false, // Allow self-signed certificates
+    },
+  });
 
-    const info = await transporter.sendMail({
-      from: '"PH Health Care" <bodruddozaredoy@gmail.com>', // sender address
-      to: email, // list of receivers
-      subject: "Reset Password Link", // Subject line
-      //text: "Hello world?", // plain text body
-      html, // html body
-    });
-
-}
+  // ✉️ Send the email
+  const info = await transporter.sendMail({
+    from: '"PH Health Care" <bodruddozaredoy@gmail.com>', // Sender info
+    to: email, // Recipient
+    subject: "Reset Password Link", // Email subject
+    html, // HTML email body
+  });
+};
 
 export default emailSender;

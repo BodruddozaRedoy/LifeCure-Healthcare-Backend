@@ -14,57 +14,58 @@ import { authRoutes } from "../modules/auth/auth.route";
 
 const router = express.Router();
 
+/**
+ * 🧭 API Route Index
+ * -----------------------------------------------------
+ * Centralized routing file that maps module-level routes
+ * to their base API paths.
+ *
+ * Each module (User, Doctor, Appointment, etc.) exports
+ * its own router, which is registered here under a unique prefix.
+ *
+ * Base API path example:
+ *   - /api/v1/user → userRoutes
+ *   - /api/v1/doctor → DoctorRoutes
+ *   - /api/v1/auth → authRoutes
+ */
+
 const moduleRoutes = [
-  {
-    path: "/user",
-    route: userRoutes,
-  },
-  {
-    path: "/auth",
-    route: authRoutes,
-  },
-  {
-    path: "/schedule",
-    route: ScheduleRoutes,
-  },
-  {
-    path: "/doctor-schedule",
-    route: doctorScheduleRoutes,
-  },
-  {
-    path: "/specialties",
-    route: SpecialtiesRoutes,
-  },
-  {
-    path: "/doctor",
-    route: DoctorRoutes,
-  },
-  {
-    path: "/admin",
-    route: AdminRoutes,
-  },
-  {
-    path: "/patient",
-    route: PatientRoutes,
-  },
-  {
-    path: "/appointment",
-    route: AppointmentRoutes,
-  },
-  {
-    path: "/prescription",
-    route: PrescriptionRoutes,
-  },
-  {
-    path: "/review",
-    route: ReviewRoutes,
-  },
-  {
-    path: "/metadata",
-    route: MetaRoutes,
-  },
+  // 👤 User & Auth
+  { path: "/user", route: userRoutes },
+  { path: "/auth", route: authRoutes },
+
+  // 🕒 Schedule Management
+  { path: "/schedule", route: ScheduleRoutes },
+  { path: "/doctor-schedule", route: doctorScheduleRoutes },
+
+  // 🩺 Medical Specialties
+  { path: "/specialties", route: SpecialtiesRoutes },
+
+  // 👨‍⚕️ Doctor & Patient Management
+  { path: "/doctor", route: DoctorRoutes },
+  { path: "/admin", route: AdminRoutes },
+  { path: "/patient", route: PatientRoutes },
+
+  // 📅 Appointments & Prescriptions
+  { path: "/appointment", route: AppointmentRoutes },
+  { path: "/prescription", route: PrescriptionRoutes },
+
+  // ⭐ Reviews
+  { path: "/review", route: ReviewRoutes },
+
+  // 📊 Dashboard Metadata
+  { path: "/metadata", route: MetaRoutes },
 ];
 
-moduleRoutes.forEach(route => router.use(route.path, route.route))
+/**
+ * Dynamically registers all module routes.
+ * Example: router.use("/user", userRoutes)
+ */
+moduleRoutes.forEach((route) => router.use(route.path, route.route));
 
+/**
+ * 📦 Export Main Router
+ * -----------------------------------------------------
+ * Exported and mounted at `/api/v1` in the main app file.
+ */
 export default router;

@@ -5,25 +5,49 @@ import { UserRole } from '@prisma/client';
 
 const router = express.Router();
 
-router.get(
-    '/',
-    PatientController.getAllFromDB
-);
+/**
+ * 🧑‍⚕️ Patient Routes
+ * -----------------------------------------------------
+ * Defines all endpoints related to patient management.
+ *
+ * Base path: /api/v1/patients
+ */
 
-router.get(
-    '/:id',
-    PatientController.getByIdFromDB
-);
+/**
+ * 📋 GET /api/v1/patients
+ * -----------------------------------------------------
+ * Retrieves all patient records with pagination, filtering, and sorting.
+ * Access: Public (can be restricted to Admin if needed)
+ */
+router.get('/', PatientController.getAllFromDB);
 
-router.patch(
-    '/',
-    auth(UserRole.PATIENT),
-    PatientController.updateIntoDB
-);
+/**
+ * 🔍 GET /api/v1/patients/:id
+ * -----------------------------------------------------
+ * Retrieves a single patient’s details by ID.
+ * Access: Public (can be restricted to Admin if needed)
+ */
+router.get('/:id', PatientController.getByIdFromDB);
 
-router.delete(
-    '/soft/:id',
-    PatientController.softDelete
-);
+/**
+ * ✏️ PATCH /api/v1/patients
+ * -----------------------------------------------------
+ * Updates the authenticated patient's profile information.
+ * Access: Patient only
+ */
+router.patch('/', auth(UserRole.PATIENT), PatientController.updateIntoDB);
 
+/**
+ * 🗑️ DELETE /api/v1/patients/soft/:id
+ * -----------------------------------------------------
+ * Soft deletes a patient (marks them as deleted but keeps record in DB).
+ * Access: Admin (or internal)
+ */
+router.delete('/soft/:id', PatientController.softDelete);
+
+/**
+ * 📦 Export Patient Routes
+ * -----------------------------------------------------
+ * Makes patient-related routes available to the main router.
+ */
 export const PatientRoutes = router;
