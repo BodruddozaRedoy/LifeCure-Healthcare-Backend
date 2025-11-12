@@ -448,3 +448,4 @@ For support and questions:
 ---
 
 **Note**: This is a healthcare management system. Ensure all data handling complies with healthcare data protection regulations (HIPAA, GDPR, etc.) in your jurisdiction.
+
